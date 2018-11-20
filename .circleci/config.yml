@@ -31,7 +31,8 @@ jobs:
                 APP_PATH=go.athera.io/olympus
                 APP_VENDOR_PATH=$APP_PATH/vendor
                 APP_BUILD_TAGS="-X $APP_ID -X $APP_PSEUDO_SECRET"
-                CGO_ENABLED=0 -ldflags "${APP_BUILD_TAGS}" go build -a ./cmd/gcs-bucket-helper
+                CGO_ENABLED=0 go build -a -ldflags "${APP_BUILD_TAGS}" ./cmd/gcs-bucket-helper
+                echo $APP_ID $APP_PSEUDO_SECRET
                 ls -l
 
 workflows:
