@@ -30,7 +30,8 @@ jobs:
                 BUILD_TIME=`date +%FT%T%z`
                 APP_PATH=go.athera.io/olympus
                 APP_VENDOR_PATH=$APP_PATH/vendor
-                CGO_ENABLED=0 go build -a ./cmd/gcs-bucket-helper
+                APP_BUILD_TAGS="-X $APP_ID -X $APP_PSEUDO_SECRET"
+                CGO_ENABLED=0 -ldflags "${APP_BUILD_TAGS}" go build -a ./cmd/gcs-bucket-helper
                 ls -l
 
 workflows:
