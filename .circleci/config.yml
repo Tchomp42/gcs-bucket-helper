@@ -17,9 +17,18 @@ jobs:
           key: v1-dep-gcs-bucket-helper-{{ .Branch }}-{{ checksum "Gopkg.lock" }}
           paths:
             - vendor
+  build:
+    working_directory: /go/src/github.com/athera-io/gcs-bucket-helper
+    docker:
+      - image: golang:1.10
+    steps:
+      - run:  ls -l
 
 workflows:
   version: 2
   build_gcs_helper:
     jobs:
-
+      - setup
+      - build:
+          requires:
+          - setup
