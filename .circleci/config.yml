@@ -34,8 +34,6 @@ jobs:
                 APP_BUILD_TAGS="-X ${APP_ID} -X ${APP_PSEUDO_SECRET}"
                 CGO_ENABLED=0 go build -a -ldflags "${APP_BUILD_TAGS}" ./cmd/gcs-bucket-helper
                 ls -l
-      - store_artifacts:
-          path: 
 workflows:
   version: 2
   build_gcs_helper:
