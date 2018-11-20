@@ -19,17 +19,6 @@
   version = "v0.31.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:4591e523cfccede48a515863ca7335270e6319682346b2bcfe4f97d9dcac8f47"
-  name = "github.com/athera-io/gcs-bucket-helper"
-  packages = [
-    "internal/gcp",
-    "internal/server",
-  ]
-  pruneopts = "UT"
-  revision = "db21b666b84707a794672664678a5955bae44bb4"
-
-[[projects]]
   digest = "1:fce9b252e844078774d9bc017acfba0e961e104f268859b23e277d3d23270202"
   name = "github.com/golang/protobuf"
   packages = [
@@ -248,8 +237,6 @@
   input-imports = [
     "cloud.google.com/go/iam/admin/apiv1",
     "cloud.google.com/go/storage",
-    "github.com/athera-io/gcs-bucket-helper/internal/gcp",
-    "github.com/athera-io/gcs-bucket-helper/internal/server",
     "github.com/golang/protobuf/jsonpb",
     "github.com/pkg/errors",
     "golang.org/x/oauth2",
