@@ -22,6 +22,10 @@ jobs:
     docker:
       - image: golang:1.10
     steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dep-gcs-bucket-helper-{{ .Branch }}-{{ checksum "Gopkg.lock" }}
       - run:  ls -l
 
 workflows:
