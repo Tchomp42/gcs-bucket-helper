@@ -64,7 +64,6 @@ jobs:
           root: .
           paths:
           - ./artifacts/
-          - .git
   build_windows:
     working_directory: /go/src/github.com/athera-io/gcs-bucket-helper
     docker:
@@ -88,7 +87,6 @@ jobs:
           root: .
           paths:
           - ./artifacts/
-          - .git
   upload_them_all:
     working_directory: /go/src/github.com/athera-io/gcs-bucket-helper
     docker:
