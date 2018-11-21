@@ -40,7 +40,6 @@ jobs:
           root: .
           paths:
           - ./artifacts/
-          - .
   build_darwin:
     working_directory: /go/src/github.com/athera-io/gcs-bucket-helper
     docker:
@@ -90,7 +89,7 @@ jobs:
   upload_them_all:
     working_directory: /go/src/github.com/athera-io/gcs-bucket-helper
     docker:
-      - image: golang:1.10
+      - image: cibuilds/github:0.10
     steps:
       - attach_workspace:
           at: .
@@ -98,7 +97,6 @@ jobs:
           name: "Gets GHR and upload artifacts to Github"
           command: |
             ls -laR;
-            go get github.com/tcnksm/ghr;
             VERSION="v0.0.1"
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -draft v0.0.1 artifacts
 workflows:
