@@ -27,11 +27,18 @@ jobs:
           keys:
           - v1-dep-gcs-bucket-helper-{{ .Branch }}-{{ checksum "Gopkg.lock" }}
       - run: |
+
                 BUILD_TIME=`date +%FT%T%z`
                 APP_PATH=github.com/athera-io/gcs-bucket-helper
                 APP_VENDOR_PATH=$APP_PATH/vendor
                 APP_BUILD_TAGS="-X main.appID=${APP_ID} -X main.appPseudoSecret=${APP_PSEUDO_SECRET}"
                 CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags "${APP_BUILD_TAGS}" ./cmd/gcs-bucket-helper
+                mkdir ./artifacts/linux
+                cp gcs-bucket-helper ./artifacts/linux
+      - persist_to_workspace:
+          root: .
+          paths:
+          - ./artifacts/
   build_darwin:
     working_directory: /go/src/github.com/athera-io/gcs-bucket-helper
     docker:
@@ -47,6 +54,12 @@ jobs:
                 APP_VENDOR_PATH=$APP_PATH/vendor
                 APP_BUILD_TAGS="-X main.appID=${APP_ID} -X main.appPseudoSecret=${APP_PSEUDO_SECRET}"
                 CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -a -ldflags "${APP_BUILD_TAGS}" ./cmd/gcs-bucket-helper
+                mkdir ./artifacts/darwin
+                cp gcs-bucket-helper ./artifacts/darwin
+      - persist_to_workspace:
+          root: .
+          paths:
+          - ./artifacts/
   build_windows:
     working_directory: /go/src/github.com/athera-io/gcs-bucket-helper
     docker:
@@ -62,7 +75,20 @@ jobs:
                 APP_VENDOR_PATH=$APP_PATH/vendor
                 APP_BUILD_TAGS="-X main.appID=${APP_ID} -X main.appPseudoSecret=${APP_PSEUDO_SECRET}"
                 CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -a -ldflags "${APP_BUILD_TAGS}" ./cmd/gcs-bucket-helper
-
+                mkdir ./artifacts/windows
+                cp gcs-bucket-helper ./artifacts/windows
+      - persist_to_workspace:
+          root: .
+          paths:
+          - ./artifacts/
+  upload_them_all:
+    working_directory: /go/src/github.com/athera-io/gcs-bucket-helper
+    docker:
+      - image: golang:1.10
+    steps:
+      - attach_workspace:
+          at: .
+      - run: ls -lR
 workflows:
   version: 2
   build_gcs_helper:
@@ -77,3 +103,8 @@ workflows:
       - build_windows:
           requires:
           - setup
+      - upload_them_all:
+          requires:
+            - build_linux
+            - build_darwin
+            - build_windows
