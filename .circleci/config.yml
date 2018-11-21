@@ -76,7 +76,7 @@ jobs:
                 APP_BUILD_TAGS="-X main.appID=${APP_ID} -X main.appPseudoSecret=${APP_PSEUDO_SECRET}"
                 CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -a -ldflags "${APP_BUILD_TAGS}" ./cmd/gcs-bucket-helper
                 mkdir -p ./artifacts/windows
-                cp gcs-bucket-helper ./artifacts/windows
+                cp gcs-bucket-helper.exe ./artifacts/windows
       - persist_to_workspace:
           root: .
           paths:
