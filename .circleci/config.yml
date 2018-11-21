@@ -96,8 +96,8 @@ jobs:
       - run:
           name: "Gets GHR and upload artifacts to Github"
           command: |
-            ls -lR
-            go get github.com/tcnksm/ghr
+            ls -lR;
+            go get github.com/tcnksm/ghr;
             VERSION="v0.0.1"
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${VERSION} ./artifacts/
 workflows:
