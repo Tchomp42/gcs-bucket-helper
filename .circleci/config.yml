@@ -98,7 +98,7 @@ jobs:
           command: |
             ls -laR;
             VERSION=${CIRCLE_TAG}
-            echo ${VERSION}
+            echo "${VERSION}"
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${VERSION} artifacts
 workflows:
   version: 2
