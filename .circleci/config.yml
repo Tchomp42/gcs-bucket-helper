@@ -35,6 +35,7 @@ jobs:
             APP_BUILD_TAGS="-X main.appID=${APP_ID} -X main.appPseudoSecret=${APP_PSEUDO_SECRET}"
             CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags "${APP_BUILD_TAGS}" ./cmd/gcs-bucket-helper
             mkdir -p ./artifacts/
+            echo "LOOOOOOOOOOOOOOOOL"
             cp gcs-bucket-helper ./artifacts/gcs-helper_linux_amd64
       - persist_to_workspace:
           root: .
@@ -107,12 +108,21 @@ workflows:
       - build_linux:
           requires:
           - setup
+          filters:  # required since `upload_them_all` has tag filters AND requires `build_linux`
+            tags:
+              only: /.*/
       - build_darwin:
           requires:
           - setup
+          filters:  # required since `upload_them_all` has tag filters AND requires `build_darwin`
+            tags:
+              only: /.*/
       - build_windows:
           requires:
           - setup
+          filters:  # required since `upload_them_all` has tag filters AND requires `build_windows`
+            tags:
+              only: /.*/
       - upload_them_all:
           requires:
             - build_linux
