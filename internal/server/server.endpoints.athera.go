@@ -13,7 +13,7 @@ func (s *Server) atheraLogin(w http.ResponseWriter, r *http.Request) {
 
 	state := randToken()
 
-	redirectURL := getLoginURL(state, s.atheraCfg, oauth2.SetAuthURLParam("audience", "https://public.elara.io"))
+	redirectURL := getLoginURL(state, s.atheraCfg, oauth2.SetAuthURLParam("audience", AuthAudienceURL))
 
 	http.Redirect(w, r, redirectURL, http.StatusSeeOther)
 }

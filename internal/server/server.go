@@ -12,6 +12,7 @@ const (
 	EndpointGoogleAuth  = "google-auth"
 	EndpointAtheraLogin = "athera-login"
 	EndpointAtheraAuth  = "athera-auth"
+	AuthAudienceURL     = "https://public.athera.io"
 )
 
 // Server ...
