@@ -36,6 +36,7 @@ func main() {
 
 	port := "8001"
 
+	oauth2.RegisterBrokenAuthHeaderProvider(atheraTokenURL)
 	serv := server.New(
 		e,
 		port,
