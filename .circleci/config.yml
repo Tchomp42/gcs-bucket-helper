@@ -29,6 +29,7 @@ jobs:
       - run: 
           name: "Builds for Linux and saves it for later"
           command: |
+            VERSION=${CIRCLE_TAG}
             BUILD_TIME=`date +%FT%T%z`
             APP_PATH=github.com/athera-io/gcs-bucket-helper
             APP_VENDOR_PATH=$APP_PATH/vendor
@@ -52,6 +53,7 @@ jobs:
       - run:
           name: "Builds for MacOS and saves it for later"
           command: |
+            VERSION=${CIRCLE_TAG}
             BUILD_TIME=`date +%FT%T%z`
             APP_PATH=github.com/athera-io/gcs-bucket-helper
             APP_VENDOR_PATH=$APP_PATH/vendor
@@ -75,6 +77,7 @@ jobs:
       - run:
           name: "Builds for Windows and saves it for later"
           command: |
+            VERSION=${CIRCLE_TAG}
             BUILD_TIME=`date +%FT%T%z`
             APP_PATH=github.com/athera-io/gcs-bucket-helper
             APP_VENDOR_PATH=$APP_PATH/vendor
