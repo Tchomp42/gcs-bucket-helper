@@ -35,7 +35,7 @@ jobs:
             APP_BUILD_TAGS="-X main.googleAppID=${G_APP_ID} -X main.googleAppPseudoSecret=${G_APP_PSEUDO_SECRET} -X main.atheraAppID=${A_APP_ID} -X main.voyagerURL=${VOYAGER_URL} -X main.atheraAuthURL=${A_AUTH_URL} -X main.atheraTokenURL=${A_TOKEN_URL}"
             CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags "${APP_BUILD_TAGS}" ./cmd/gcs-bucket-helper
             mkdir -p ./artifacts/
-            cp gcs-bucket-helper ./artifacts/gcs-helper_linux_amd64
+            cp gcs-bucket-helper ./artifacts/gcs-helper_linux_${VERSION}
       - persist_to_workspace:
           root: .
           paths:
@@ -58,7 +58,7 @@ jobs:
             APP_BUILD_TAGS="-X main.googleAppID=${G_APP_ID} -X main.googleAppPseudoSecret=${G_APP_PSEUDO_SECRET} -X main.atheraAppID=${A_APP_ID} -X main.voyagerURL=${VOYAGER_URL} -X main.atheraAuthURL=${A_AUTH_URL} -X main.atheraTokenURL=${A_TOKEN_URL}"
             CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -a -ldflags "${APP_BUILD_TAGS}" ./cmd/gcs-bucket-helper
             mkdir -p ./artifacts
-            cp gcs-bucket-helper ./artifacts/gcs-helper_darwin_amd64
+            cp gcs-bucket-helper ./artifacts/gcs-helper_darwin_${VERSION}
       - persist_to_workspace:
           root: .
           paths:
@@ -81,7 +81,7 @@ jobs:
             APP_BUILD_TAGS="-X main.googleAppID=${G_APP_ID} -X main.googleAppPseudoSecret=${G_APP_PSEUDO_SECRET} -X main.atheraAppID=${A_APP_ID} -X main.voyagerURL=${VOYAGER_URL} -X main.atheraAuthURL=${A_AUTH_URL} -X main.atheraTokenURL=${A_TOKEN_URL}"
             CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -a -ldflags "${APP_BUILD_TAGS}" ./cmd/gcs-bucket-helper
             mkdir -p ./artifacts
-            cp gcs-bucket-helper.exe ./artifacts/gcs-helper_windows_amd64.exe
+            cp gcs-bucket-helper.exe ./artifacts/gcs-helper_windows_${VERSION}.exe
       - persist_to_workspace:
           root: .
           paths:
