@@ -28,7 +28,7 @@ OUTER:
 	for {
 		s, _ := in.ReadString('\n')
 
-		s = strings.TrimSuffix(s, "\n")
+		s = strings.TrimSuffix(strings.TrimSuffix(s, "\n"), "\r")
 
 		for _, validator := range validators {
 			if err := validator(s); err != nil {
