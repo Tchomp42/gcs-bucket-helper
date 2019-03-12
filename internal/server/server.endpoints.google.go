@@ -23,13 +23,13 @@ func (s *Server) googleLogin(w http.ResponseWriter, r *http.Request) {
 // googleAuth endpoint
 func (s *Server) googleAuth(w http.ResponseWriter, r *http.Request) {
 
-	apiKey := r.URL.Query()["code"][0]
+	codeVerifier := r.URL.Query().Get("code")
 
 	exchangeOpts := []oauth2.AuthCodeOption{
 		oauth2.SetAuthURLParam("code_verifier", s.googleCfg.Verifier),
 	}
 
-	tok, err := s.googleCfg.Conf.Exchange(r.Context(), apiKey, exchangeOpts...)
+	tok, err := s.googleCfg.Conf.Exchange(r.Context(), codeVerifier, exchangeOpts...)
 	if err != nil {
 		log.Fatal("Failed exchange: ", err)
 	}
